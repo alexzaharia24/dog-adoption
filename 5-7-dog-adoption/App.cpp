@@ -6,11 +6,12 @@
 using namespace std;
 
 int main() {
-	DynVec<int> a;
+	DynVec<Dog> a;
 	Dog d("Husky", "Sven", 4, "url");
 	cout << d << endl;
-	a.add(2);
+	a.add(d);
 	cout << a.toString();
+
 
 
 	system("pause");

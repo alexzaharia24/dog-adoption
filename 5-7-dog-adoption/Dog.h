@@ -10,6 +10,7 @@ private:
 	string photo;
 public:
 	/* CONSTURCTOR */
+	Dog();
 	Dog(string breed, string name, int age, string photo);
 	Dog(const Dog& d);
 	~Dog();

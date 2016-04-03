@@ -1,6 +1,12 @@
 #include "Dog.h"
 
 /* CONSTRUCTORS */
+Dog::Dog() {
+	this->breed = "";
+	this->name = "";
+	this->age = -1;
+	this->photo = "";
+}
 Dog::Dog(string breed, string name, int age, string photo) {
 	this->breed = breed;
 	this->name = name;
@@ -59,7 +65,7 @@ bool Dog::operator==(const Dog & d) {
 bool Dog::operator<(const Dog & d) {
 	return this->age < d.age;
 }
-ostream & Dog::operator<<(ostream & Str) {
-	Str << this->name << " " << this->breed << " " << this->age << " " << this->photo;
+ostream & operator<<(ostream & Str, const Dog& d) {
+	Str << d.name << " " << d.breed << " " << d.age << " " << d.photo;
 	return Str;
 }
