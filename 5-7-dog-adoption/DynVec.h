@@ -1,4 +1,8 @@
 #pragma once
+#include <string>
+#include <sstream>
+using namespace std;
+
 template <typename T>
 class DynVec {
 private:
@@ -17,6 +21,13 @@ public:
 	T operator[](int pos);
 	void add(T e);
 	void remove(T e);
+	string toString() {
+		stringstream buffer;
+		for (int i = 0; i < this->size; i++) {
+			buffer << this->elems[i] << " ";
+		}
+		return buffer.str();
+	}
 	
 };
 
