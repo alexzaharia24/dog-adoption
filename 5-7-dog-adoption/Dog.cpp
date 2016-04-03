@@ -66,6 +66,6 @@ bool Dog::operator<(const Dog & d) {
 	return this->age < d.age;
 }
 ostream & operator<<(ostream & Str, const Dog& d) {
-	Str << d.name << " " << d.breed << " " << d.age << " " << d.photo;
+	Str << d.name << " | " << d.breed << " | " << d.age << " | " << d.photo;
 	return Str;
 }
