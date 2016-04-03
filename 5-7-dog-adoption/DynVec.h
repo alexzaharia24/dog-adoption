@@ -12,6 +12,7 @@ public:
 	~DynVec();
 	DynVec& operator=(const DynVec<T>& v);
 	int getSize();
+	int getCapacity();
 
 	T operator[](int pos);
 	void add(T e);
@@ -23,6 +24,11 @@ template <typename T>
 void DynVec<T>::resize(int factor) {
 	this->capacity *= factor;
 	T* temp = new T[this->capacity];
+	for (int i = 0; i < this->size; i++) {
+		temp[i] = this->elems[i];
+	}
+	delete[] this->elems;
+	this->elems = temp;
 }
 
 template <typename T>
@@ -64,9 +70,15 @@ DynVec<T>& DynVec<T>::operator=(const DynVec<T>& v) {
 	return *this;
 }
 
+/* GETTERS */
 template <typename T>
 int DynVec<T>::getSize() {
 	return this->size;
+}
+
+template <typename T>
+int DynVec<T>::getCapacity() {
+	return this->capacity;
 }
 
 template <typename T>
