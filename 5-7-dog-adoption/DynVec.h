@@ -1,4 +1,6 @@
 #pragma once
+#include <sstream>
+
 template <typename T>
 class DynVec {
 private:
@@ -7,19 +9,28 @@ private:
 	T* elems;
 	void resize(int factor = 2);
 public:
+	/* CONSTRUCTORS */
+	//DynVec();
 	DynVec(int capacity = 10);
 	DynVec(const DynVec& v);
 	~DynVec();
-	DynVec& operator=(const DynVec<T>& v);
+
+	/* OPERATORS */
+	DynVec& operator=(const DynVec& v);
+	T operator[](int pos);
+	
+
+	/* GETTERS */
 	int getSize();
 	int getCapacity();
 
-	T operator[](int pos);
+	/* OPERATIONS */
 	void add(T e);
 	void remove(T e);
-	
+	std::string toString();
 };
 
+/* PRIVATE METHODS */
 template <typename T>
 void DynVec<T>::resize(int factor) {
 	this->capacity *= factor;
@@ -31,15 +42,20 @@ void DynVec<T>::resize(int factor) {
 	this->elems = temp;
 }
 
+/* CONSTRUCTORS */
+//template <typename T>
+//DynVec<T>::DynVec() {
+//	this->capacity = 10;
+//}
+
 template <typename T>
 DynVec<T>::DynVec(int capacity) {
 	this->capacity = capacity;
 	this->size = 0;
 	this->elems = new T[capacity];
 }
-
 template <typename T>
-DynVec<T>::DynVec(const DynVec& v) {
+DynVec<T>::DynVec(const DynVec<T>& v) {
 	this->capacity = v.capacity;
 	this->size = v.size;
 	this->elems = new T[this->capacity];
@@ -47,12 +63,12 @@ DynVec<T>::DynVec(const DynVec& v) {
 		this->elems[i] = v.elems[i];
 	}
 }
-
 template <typename T>
 DynVec<T>::~DynVec() {
 	delete[] this->elems;
 }
 
+/* OPERATORS */
 template <typename T>
 DynVec<T>& DynVec<T>::operator=(const DynVec<T>& v) {
 	if (this == &v) {
@@ -69,23 +85,30 @@ DynVec<T>& DynVec<T>::operator=(const DynVec<T>& v) {
 	}
 	return *this;
 }
+template <typename T>
+T DynVec<T>::operator[](int pos) {
+	return this->elems[pos];
+}
+template <typename T>
+std::string DynVec<T>::toString() {
+	stringstream Str;
+	for (int i = 0; i < this->getSize(); i++) {
+		Str << this->elems[i] << " ";
+	}
+	return Str.str();
+}
 
 /* GETTERS */
 template <typename T>
 int DynVec<T>::getSize() {
 	return this->size;
 }
-
 template <typename T>
 int DynVec<T>::getCapacity() {
 	return this->capacity;
 }
 
-template <typename T>
-T DynVec<T>::operator[](int pos) {
-	return this->elems[pos];
-}
-
+/* OPERATIONS */
 template <typename T>
 void DynVec<T>::add(T e) {
 	if (this->size == this->capacity) {

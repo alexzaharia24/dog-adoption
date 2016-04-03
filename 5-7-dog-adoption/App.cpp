@@ -1,12 +1,18 @@
 #include <iostream>
 
 #include "DynVec.h"
+#include "Dog.h"
 
 using namespace std;
 
 int main() {
-	DynVec<int> a;
-	cout << a.getCapacity() << endl;
+	DynVec<Dog> a;
+	Dog d("Husky", "Sven", 4, "url");
+	cout << d << endl;
+	a.add(d);
+	cout << a.toString();
+
+
 
 	system("pause");
 	return 0;
