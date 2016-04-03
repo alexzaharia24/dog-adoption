@@ -1,18 +1,26 @@
 #include <iostream>
-
-#include "DynVec.h"
-#include "Dog.h"
+#include "UI.h"
 
 using namespace std;
 
+class App {
+private:
+	UI* ui;
+public:
+	App() {
+		this->ui = new UI();
+	}
+	~App() {
+		delete this->ui;
+	}
+	void run() {
+		ui->mainMenu();
+	}
+};
+
 int main() {
-	DynVec<Dog> a;
-	Dog d("Husky", "Sven", 4, "url");
-	cout << d << endl;
-	a.add(d);
-	cout << a.toString();
-
-
+	App app;
+	app.run();
 
 	system("pause");
 	return 0;

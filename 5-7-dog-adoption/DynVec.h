@@ -10,7 +10,6 @@ private:
 	void resize(int factor = 2);
 public:
 	/* CONSTRUCTORS */
-	//DynVec();
 	DynVec(int capacity = 10);
 	DynVec(const DynVec& v);
 	~DynVec();
@@ -25,8 +24,10 @@ public:
 	int getCapacity();
 
 	/* OPERATIONS */
+	int find(T e);
 	void add(T e);
 	void remove(T e);
+	void update(T e);
 	std::string toString();
 };
 
@@ -43,11 +44,6 @@ void DynVec<T>::resize(int factor) {
 }
 
 /* CONSTRUCTORS */
-//template <typename T>
-//DynVec<T>::DynVec() {
-//	this->capacity = 10;
-//}
-
 template <typename T>
 DynVec<T>::DynVec(int capacity) {
 	this->capacity = capacity;
@@ -89,14 +85,6 @@ template <typename T>
 T DynVec<T>::operator[](int pos) {
 	return this->elems[pos];
 }
-template <typename T>
-std::string DynVec<T>::toString() {
-	stringstream Str;
-	for (int i = 0; i < this->getSize(); i++) {
-		Str << this->elems[i] << " ";
-	}
-	return Str.str();
-}
 
 /* GETTERS */
 template <typename T>
@@ -110,6 +98,15 @@ int DynVec<T>::getCapacity() {
 
 /* OPERATIONS */
 template <typename T>
+int DynVec<T>::find(T e) {
+	for (int i = 0; i < this->size; i++) {
+		if (this->elems[i] == e) {
+			return i;
+		}
+	}
+	return -1;
+}
+template <typename T>
 void DynVec<T>::add(T e) {
 	if (this->size == this->capacity) {
 		this->resize();
@@ -117,8 +114,26 @@ void DynVec<T>::add(T e) {
 	this->elems[this->size] = e;
 	this->size++;
 }
-
 template <typename T>
 void DynVec<T>::remove(T e) {
+	int found = this->find(e);
+	for (int i = found; i < this->size; i++) {
+		this->elems[i] = this->elems[i + 1];
+	}
+	this->size--;
 }
+template <typename T>
+void DynVec<T>::update(T e) {
+	int found = this->find(e);
+	this->elems[found] = e;
+}
+template <typename T>
+std::string DynVec<T>::toString() {
+	stringstream Str;
+	for (int i = 0; i < this->size; i++) {
+		Str << this->elems[i] << "\n";
+	}
+	return Str.str();
+}
+
 
