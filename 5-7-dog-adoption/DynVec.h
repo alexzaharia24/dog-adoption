@@ -16,7 +16,7 @@ public:
 
 	/* OPERATORS */
 	DynVec& operator=(const DynVec& v);
-	T operator[](int pos);
+	T& operator[](int pos);
 	
 
 	/* GETTERS */
@@ -82,7 +82,7 @@ DynVec<T>& DynVec<T>::operator=(const DynVec<T>& v) {
 	return *this;
 }
 template <typename T>
-T DynVec<T>::operator[](int pos) {
+T& DynVec<T>::operator[](int pos) {
 	return this->elems[pos];
 }
 

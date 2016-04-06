@@ -25,11 +25,11 @@ void adminCommands() {
 	cout << "rem	- Remove a dog.\n";
 	cout << "upd	- Update a dog.\n";
 	cout << "show	- Show the dogs.\n";
-	cout << "b		- Go back.\n";
+	cout << "exit	- Go back to Main Menu.\n";
 	cout << "\n";
 }
 int UI::adminExecute(string cmd) {
-	if (cmd == "b") {
+	if (cmd == "exit") {
 		cout << "\n";
 		return 1;
 	}
@@ -106,13 +106,12 @@ void userCommands() {
 	cout << "bro	- Browose dogs.\n";
 	cout << "fil	- Filter dogs.\n";
 	cout << "lis	- See adoption list.\n";
-	cout << "b		- Go back.\n";
+	cout << "exit	- Go back to Main Menu.\n";
 	cout << "\n";
 }
 
 int UI::userExecute(string cmd) {
-	if (cmd == "b") {
-		cout << "Back\n";
+	if (cmd == "exit") {
 		cout << "\n";
 		return 1;
 	}
@@ -141,15 +140,42 @@ int UI::userExecute(string cmd) {
 
 void UI::userMenu() {
 	string cmd;
-	userCommands();
 	do {
+		userCommands();
 		cmd = readCmd();
 	} while (!userExecute(cmd));
 }
 
 void UI::browseDogsMenu() {
 	DynVec<Dog>* dogs = this->ctrl->getRepo()->getDogs();
-	cout << dogs[1].toString();
+	int i = 0;
+	string cmd;
+	while (1) {
+		if (i == dogs->getSize()) {
+			i = 0;
+		}
+		cout << "i=" << i << "\n";
+		cout << (*dogs)[i] << "\n";
+		cout << "ado	- Adopt "<<(*dogs)[i].getName()<<". \n";
+		cout << "next	- Next dog.\n";
+		cout << "exit	- Go back to the User Panel.\n";
+		cout << "\n";
+		cmd = readCmd();
+		if (cmd == "exit") {
+			break;
+		}
+		else if (cmd == "ado") {
+			cout << "Adopt dog";
+			continue;
+		}
+		else if (cmd == "next") {
+			i++;
+			continue;
+		}
+		else {
+			cout << ">> Wrong command.\n";
+		}
+	}
 }
 
 void menuCommands() {
@@ -187,7 +213,7 @@ void UI::mainMenu() {
 
 	Dog d1("Husky", "Sven", 4, "url1");
 	Dog d2("German shepard", "Lycan", 6, "url2");
-	Dog d3("Rotweiller", "Dragonknight", 3, "url3");
+	Dog d3("Rotweiller", "Dragon Knight", 3, "url3");
 	Dog d4("Husky", "Sven", 5, "url1_1");
 
 	//cout << this->ctrl->add(d1) << endl;
