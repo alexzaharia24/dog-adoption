@@ -19,7 +19,9 @@ public:
 	void userMenu();
 
 	/* OPERATIONS */
-	void printDogs();
+	void printShelterDogs();
+	void printAdoptedDogs();
+
 
 
 };

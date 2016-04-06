@@ -83,7 +83,7 @@ int UI::adminExecute(string cmd) {
 	}
 	else if (cmd == "show") {
 		cout << "\n";
-		this->printDogs();
+		this->printShelterDogs();
 		cout << "\n";
 		return 0;
 	}
@@ -102,7 +102,7 @@ void UI::adminMenu() {
 }
 
 void userCommands() {
-	cout << "--- User panel ---\n";
+	cout << "\n--- User panel ---\n";
 	cout << "bro	- Browose dogs.\n";
 	cout << "fil	- Filter dogs.\n";
 	cout << "lis	- See adoption list.\n";
@@ -116,19 +116,31 @@ int UI::userExecute(string cmd) {
 		return 1;
 	}
 	else if (cmd == "bro") {
-		cout << "Browse dogs\n";
 		browseDogsMenu();
 		cout << "\n";
 		return 0;
 	}
 	else if (cmd == "fil") {
+		string breed;
+		int age;
 		cout << "Filter dogs\n";
+
+		cout << "breed = ";
+		cin >> breed;
+		cout << "age = ";
+		cin >> age;
+
+		DynVec<Dog> result = this->ctrl->filter(breed, age);
+		cout << result.toString();
 		cout << "\n";
 		return 0;
 	}
 	else if (cmd == "lis") {
-		cout << "See adoption lists\n";
-		cout << "\n";
+		cout << "\n=== Adoption list. === \n";
+		if (this->ctrl->getAdopted().getSize() == 0) {
+			cout << "\nNo adoption yet.";
+		}
+		printAdoptedDogs();
 		return 0;
 	}
 	else {
@@ -148,24 +160,34 @@ void UI::userMenu() {
 
 void UI::browseDogsMenu() {
 	DynVec<Dog>* dogs = this->ctrl->getRepo()->getDogs();
+	
 	int i = 0;
 	string cmd;
 	while (1) {
+		if (dogs->getSize() == 0) {
+			cout << "\nThere are no dogs up for adoption. \n";
+			return;
+		}
 		if (i == dogs->getSize()) {
 			i = 0;
 		}
-		cout << "i=" << i << "\n";
-		cout << (*dogs)[i] << "\n";
-		cout << "ado	- Adopt "<<(*dogs)[i].getName()<<". \n";
+		Dog d = (*dogs)[i];
+
+		cout << "\n";
+		cout << d << "\n";
+		cout << "ado	- Adopt "<<d.getName()<<". \n";
 		cout << "next	- Next dog.\n";
 		cout << "exit	- Go back to the User Panel.\n";
 		cout << "\n";
+
 		cmd = readCmd();
 		if (cmd == "exit") {
 			break;
 		}
 		else if (cmd == "ado") {
-			cout << "Adopt dog";
+			cout << "\n";
+			cout << ">>> "<<d.getName() << " was adopted.\n";
+			this->ctrl->adopt(d);
 			continue;
 		}
 		else if (cmd == "next") {
@@ -226,7 +248,7 @@ void UI::mainMenu() {
 	this->ctrl->add(d3);
 	this->ctrl->update(d4);
 	
-	//this->printDogs();
+	//this->printShelterDogs();
 	
 	do {
 		menuCommands();
@@ -236,6 +258,9 @@ void UI::mainMenu() {
 }
 
 /* OPERATIONS */
-void UI::printDogs() {
+void UI::printShelterDogs() {
 	cout << this->ctrl->getRepo()->getDogs()->toString() << endl;
+}
+void UI::printAdoptedDogs() {
+	cout << this->ctrl->getAdopted().toString() << endl;
 }
