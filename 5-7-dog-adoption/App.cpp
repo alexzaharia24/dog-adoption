@@ -1,5 +1,6 @@
 #include <iostream>
 #include "UI.h"
+#include "Test.h"
 
 using namespace std;
 
@@ -19,6 +20,9 @@ public:
 };
 
 int main() {
+	Test t;
+	t.testAll();
+
 	App app;
 	app.run();
 

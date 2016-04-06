@@ -29,7 +29,7 @@ public:
 	/* User adopts a dog. The adopted dog will be deleted from the initial list and added to the adopted dogs list.
 		Input:	d (Dog) - the dog to be adopted */
 	DynVec<Dog> filter(string breed, int age);
-	/* Filter the list of dogs. Return the lsit of dogs that have a give breed and whose age is smaller than the given one. 
+	/* Filter the list of dogs. Return the list of dogs that have a given breed and whose age is smaller than the given one. 
 		Input:	breed (string)  - the given breed 
 				age (int)		- the given age
 		Output: the list of dogs that match the criteria. */

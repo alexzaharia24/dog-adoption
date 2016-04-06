@@ -36,5 +36,4 @@ public:
 	/* OPERATIONS */
 	void display();
 	/* Open a browser window showing the dog's photo, provided by the stored url. */
-
 };

@@ -255,7 +255,7 @@ void UI::mainMenu() {
 	this->ctrl->add(d3);
 	this->ctrl->update(d4);
 	
-	do {
+	do { 
 		menuCommands();
 		cmd = readCmd();
 	} while (!mainExecute(cmd));

@@ -75,3 +75,8 @@ ostream & operator<<(ostream & Str, const Dog& d) {
 void Dog::display() {
 	ShellExecuteA(NULL, NULL, "iexplore.exe", this->getPhoto().c_str(), NULL, SW_SHOWMAXIMIZED);
 }
+
+/* TEST ZONE */
+
+
+
