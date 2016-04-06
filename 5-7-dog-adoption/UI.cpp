@@ -119,7 +119,8 @@ int UI::userExecute(string cmd) {
 		return 1;
 	}
 	else if (cmd == "bro") {
-		browseDogsMenu();
+		DynVec<Dog>* dogs = this->ctrl->getRepo()->getDogs();
+		browseDogsMenu(dogs);
 		cout << "\n";
 		return 0;
 	}
@@ -139,7 +140,7 @@ int UI::userExecute(string cmd) {
 			cout << "No such dogs.";
 		}
 		else {
-			cout << result.toString();
+			browseDogsMenu(&result);
 		}
 
 		cout << "\n";
@@ -150,7 +151,7 @@ int UI::userExecute(string cmd) {
 		if (this->ctrl->getAdopted().getSize() == 0) {
 			cout << "\nNo adoption yet.";
 		}
-		printAdoptedDogs();
+		browseDogsMenu(&this->ctrl->getAdopted());
 		return 0;
 	}
 	else {
@@ -168,8 +169,8 @@ void UI::userMenu() {
 	} while (!userExecute(cmd));
 }
 
-void UI::browseDogsMenu() {
-	DynVec<Dog>* dogs = this->ctrl->getRepo()->getDogs();
+void UI::browseDogsMenu(DynVec<Dog>* dogs) {
+	
 	
 	int i = 0;
 	string cmd;
