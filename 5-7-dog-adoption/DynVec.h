@@ -8,6 +8,8 @@ private:
 	int size;
 	T* elems;
 	void resize(int factor = 2);
+	/*	Resize the capacity of the vector
+		Input: factor (int) - the factor to multiply the current capacity with	*/
 public:
 	/* CONSTRUCTORS */
 	DynVec(int capacity = 10);
@@ -25,10 +27,21 @@ public:
 
 	/* OPERATIONS */
 	int find(T e);
+	/* Find an element inside the vector.
+		Input:	e (T) - the element to be searched
+		Output: pos (int) - the position of the element in the vector */
 	void add(T e);
+	/* Add an element to the vector.
+	Input:	e (T) - the element to be added */
 	void remove(T e);
+	/* Remove an element from the vector.
+	Input:	e (T) - the element to ve removed */
 	void update(T e);
+	/* Update and element in the vector.
+	Input:	e (T) - the element to be updated */
 	std::string toString();
+	/* Display all the elements of the vector in a formated way.
+	Output: the elements of the vector each on a line separated by "|" */
 };
 
 /* PRIVATE METHODS */

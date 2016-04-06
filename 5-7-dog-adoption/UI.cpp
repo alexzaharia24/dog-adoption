@@ -14,6 +14,8 @@ UI::~UI() {
 
 /* MENU */
 string readCmd() {
+	/* Read a command from the user.
+	Output: cmd (string) - the read command */
 	string cmd;
 	cout << ">> Enter a command\n";
 	cin >> cmd;
