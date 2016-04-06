@@ -31,7 +31,9 @@ public:
 	void operator=(const Dog& d);
 	bool operator==(const Dog& d);
 	bool operator<(const Dog& d);
-	
 	friend ostream& operator<<(ostream& Str, const Dog& d);
+
+	/* OPERATIONS */
+	void display();
 
 };

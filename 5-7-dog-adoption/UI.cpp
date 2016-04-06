@@ -1,4 +1,5 @@
 #include <iostream>
+#include<Windows.h>
 #include "UI.h"
 
 using namespace std;
@@ -78,13 +79,11 @@ int UI::adminExecute(string cmd) {
 
 		cout << this->ctrl->update(Dog{ breed, name, age, photo });
 
-		cout << "Update\n";
 		return 0;
 	}
 	else if (cmd == "show") {
 		cout << "\n";
 		this->printShelterDogs();
-		cout << "\n";
 		return 0;
 	}
 	else {
@@ -95,8 +94,10 @@ int UI::adminExecute(string cmd) {
 }
 void UI::adminMenu() {
 	string cmd;
-	adminCommands();
+	
 	do {
+		cout << "\n";
+		adminCommands();
 		cmd = readCmd();
 	} while (!adminExecute(cmd));
 }
@@ -129,9 +130,16 @@ int UI::userExecute(string cmd) {
 		cin >> breed;
 		cout << "age = ";
 		cin >> age;
+		cout << "\n";
 
 		DynVec<Dog> result = this->ctrl->filter(breed, age);
-		cout << result.toString();
+		if (result.getSize() == 0) {
+			cout << "No such dogs.";
+		}
+		else {
+			cout << result.toString();
+		}
+
 		cout << "\n";
 		return 0;
 	}
@@ -172,6 +180,8 @@ void UI::browseDogsMenu() {
 			i = 0;
 		}
 		Dog d = (*dogs)[i];
+		d.display();
+
 
 		cout << "\n";
 		cout << d << "\n";
@@ -233,22 +243,15 @@ int UI::mainExecute(string cmd) {
 void UI::mainMenu() {
 	string cmd; 
 
-	Dog d1("Husky", "Sven", 4, "url1");
-	Dog d2("German shepard", "Lycan", 6, "url2");
-	Dog d3("Rotweiller", "Dragon Knight", 3, "url3");
-	Dog d4("Husky", "Sven", 5, "url1_1");
-
-	//cout << this->ctrl->add(d1) << endl;
-	//cout << this->ctrl->add(d2) << endl;
-	//cout << this->ctrl->add(d3) << endl;
-	//cout << this->ctrl->update(d4) << endl;
+	Dog d1("Husky", "Sven", 4, "http://goo.gl/647s1X");
+	Dog d2("Wolf", "Lycan", 6, "http://goo.gl/PUxwwT");
+	Dog d3("Rotweiller", "Knight", 3, "https://goo.gl/5oIYRa");
+	Dog d4("Husky", "Sven", 5, "http://goo.gl/hCINq1");
 
 	this->ctrl->add(d1);
 	this->ctrl->add(d2);
 	this->ctrl->add(d3);
 	this->ctrl->update(d4);
-	
-	//this->printShelterDogs();
 	
 	do {
 		menuCommands();
