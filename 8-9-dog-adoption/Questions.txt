@@ -1,0 +1,16 @@
+1. How to overload << in the Dynamic Vector class?
+2. How to delete an element of the Dynamic Array?
+3. Why this way: 
+	template <typename T>
+	T& DynVec<T>::operator[](int pos) {
+		return this->elems[pos];
+	}
+
+	And not this way:
+
+	template <typename T>
+	T DynVec<T>::operator[](int pos) {
+		return this->elems[pos];
+	}
+
+	T& and not T
