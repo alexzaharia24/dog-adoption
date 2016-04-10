@@ -1,5 +1,9 @@
 #include <iostream>
 #include "UI.h"
+<<<<<<< HEAD
+=======
+#include "Test.h"
+>>>>>>> develop
 
 using namespace std;
 
@@ -17,8 +21,16 @@ public:
 		ui->mainMenu();
 	}
 };
+<<<<<<< HEAD
 
 int main() {
+=======
+
+int main() {
+	Test t;
+	t.testAll();
+
+>>>>>>> develop
 	App app;
 	app.run();
 

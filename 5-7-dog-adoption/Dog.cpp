@@ -1,3 +1,4 @@
+#include<Windows.h>
 #include "Dog.h"
 
 /* CONSTRUCTORS */
@@ -69,3 +70,13 @@ ostream & operator<<(ostream & Str, const Dog& d) {
 	Str << d.name << " | " << d.breed << " | " << d.age << " | " << d.photo;
 	return Str;
 }
+
+/* OPERATIONS */
+void Dog::display() {
+	ShellExecuteA(NULL, NULL, "iexplore.exe", this->getPhoto().c_str(), NULL, SW_SHOWMAXIMIZED);
+}
+
+/* TEST ZONE */
+
+
+

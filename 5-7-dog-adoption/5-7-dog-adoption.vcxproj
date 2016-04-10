@@ -114,6 +114,10 @@
     <ClInclude Include="Dog.h" />
     <ClInclude Include="DynVec.h" />
     <ClInclude Include="Repository.h" />
+<<<<<<< HEAD
+=======
+    <ClInclude Include="Test.h" />
+>>>>>>> develop
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +125,10 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="Repository.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="Test.cpp" />
+>>>>>>> develop
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>

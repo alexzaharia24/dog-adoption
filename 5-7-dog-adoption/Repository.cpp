@@ -24,7 +24,11 @@ std::string Repository::add(Dog d) {
 std::string Repository::remove(Dog d) {
 	int found = this->dogs->find(d);
 	if (found == -1) {
+<<<<<<< HEAD
 		return "Dog not in the list. Cannot delete.";
+=======
+		return "Dog not in the list. Cannot remove.";
+>>>>>>> develop
 	}
 	this->dogs->remove(d);
 	return "Dog removed with success.";
