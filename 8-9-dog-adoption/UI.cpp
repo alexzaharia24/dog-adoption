@@ -118,7 +118,7 @@ int UI::userExecute(string cmd) {
 		return 1;
 	}
 	else if (cmd == "bro") {
-		DynVec<Dog>* dogs = this->ctrl->getRepo()->getDogs();
+		vector<Dog> dogs = this->ctrl->getRepo()->getDogs();
 		browseDogsMenu(dogs);
 		cout << "\n";
 		return 0;
@@ -134,12 +134,12 @@ int UI::userExecute(string cmd) {
 		cin >> age;
 		cout << "\n";
 
-		DynVec<Dog> result = this->ctrl->filter(breed, age);
-		if (result.getSize() == 0) {
+		vector<Dog> result = this->ctrl->filter(breed, age);
+		if (result.size() == 0) {
 			cout << "No such dogs.";
 		}
 		else {
-			browseDogsMenu(&result);
+			browseDogsMenu(result);
 		}
 
 		cout << "\n";
@@ -147,10 +147,10 @@ int UI::userExecute(string cmd) {
 	}
 	else if (cmd == "lis") {
 		cout << "\n=== Adoption list. === \n";
-		if (this->ctrl->getAdopted().getSize() == 0) {
+		if (this->ctrl->getAdopted().size() == 0) {
 			cout << "\nNo adoption yet.";
 		}
-		browseDogsMenu(&this->ctrl->getAdopted());
+		browseDogsMenu(this->ctrl->getAdopted());
 		return 0;
 	}
 	else {
@@ -168,20 +168,20 @@ void UI::userMenu() {
 	} while (!userExecute(cmd));
 }
 
-void UI::browseDogsMenu(DynVec<Dog>* dogs) {
+void UI::browseDogsMenu(vector<Dog> dogs) {
 	
 	
 	int i = 0;
 	string cmd;
 	while (1) {
-		if (dogs->getSize() == 0) {
+		if (dogs.size() == 0) {
 			cout << "\nThere are no dogs up for adoption. \n";
 			return;
 		}
-		if (i == dogs->getSize()) {
+		if (i == dogs.size() ) {
 			i = 0;
 		}
-		Dog d = (*dogs)[i];
+		Dog d = (dogs)[i];
 		d.display();
 
 
@@ -264,8 +264,10 @@ void UI::mainMenu() {
 
 /* OPERATIONS */
 void UI::printShelterDogs() {
-	cout << this->ctrl->getRepo()->getDogs()->toString() << endl;
+	for (auto d : this->ctrl->getRepo()->getDogs())
+		cout << d << "\n";
 }
 void UI::printAdoptedDogs() {
-	cout << this->ctrl->getAdopted().toString() << endl;
+	for (auto d : this->ctrl->getAdopted())
+		cout << d << "\n";
 }

@@ -2,38 +2,36 @@
 
 /* CONSTRUCTORS */
 Repository::Repository() {
-	this->dogs = new DynVec<Dog>;
 }
-Repository::~Repository() {
-	delete dogs;
-}
+Repository::~Repository() {}
 
 /* GETTERS */
-DynVec<Dog>* Repository::getDogs() {
+vector<Dog> Repository::getDogs() {
 	return this->dogs;
 }
 
 /* OPERATIONS */
 std::string Repository::add(Dog d) {
-	if (this->dogs->find(d) != -1) {
+	vector<Dog>::iterator found = find(this->dogs.begin(), this->dogs.end(), d);
+	if (found != dogs.end()) {
 		return "Dog already in the list. Cannot add.";
 	}
-	this->dogs->add(d);
+	this->dogs.push_back(d);
 	return "Dog added with success.";
 }
 std::string Repository::remove(Dog d) {
-	int found = this->dogs->find(d);
-	if (found == -1) {
+	vector<Dog>::iterator found = find(this->dogs.begin(), this->dogs.end(), d);
+	if (found == dogs.end()) {
 		return "Dog not in the list. Cannot remove.";
 	}
-	this->dogs->remove(d);
+	this->dogs.erase(found);
 	return "Dog removed with success.";
 }
 std::string Repository::update(Dog d) {
-	int found = this->dogs->find(d);
-	if (found == -1) {
+	vector<Dog>::iterator found = find(this->dogs.begin(), this->dogs.end(), d);
+	if (found == dogs.end()) {
 		return "Dog not in the list. Cannot update.";
 	}
-	this->dogs->update(d);
+	*found = d;
 	return "Dog updated with success.";
 }

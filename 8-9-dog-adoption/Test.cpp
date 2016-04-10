@@ -1,4 +1,5 @@
-#include<assert.h>
+#include <assert.h>
+#include <iostream>
 #include "Test.h"
 
 void Test::testDog() {
@@ -21,36 +22,37 @@ void Test::testDog() {
 
 void Test::testRepo() {
 	Repository r;
-	DynVec<Dog>* dogs = r.getDogs();
+	vector<Dog> dogs = r.getDogs();
 	Dog d1{ "a", "b", 0, "c" };
 	Dog d2{ "x", "y", 0, "z" };
 	Dog d3{ "a", "b", 1, "f" };
 
-	assert(dogs->getSize() == 0);
+	assert(r.getDogs().size() == 0);
 	r.add(d1);
-	assert(dogs->getSize() == 1);
+	cout << r.getDogs().size();
+	assert(r.getDogs().size() == 1);
 	r.add(d1);
-	assert(dogs->getSize() == 1);
+	assert(r.getDogs().size() == 1);
 	r.add(d2);
-	assert(dogs->getSize() == 2);
+	assert(r.getDogs().size() == 2);
 
 	r.remove(d2);
-	assert(dogs->getSize() == 1);
+	assert(r.getDogs().size() == 1);
 	r.remove(d2);
-	assert(dogs->getSize() == 1);
+	assert(r.getDogs().size() == 1);
 
 	r.update(d3);
-	assert(dogs->getSize() == 1);
-	assert((*dogs)[0].getBreed() == "a");
-	assert((*dogs)[0].getName() == "b");
-	assert((*dogs)[0].getAge() == 1);
-	assert((*dogs)[0].getPhoto() == "f");
+	assert(r.getDogs().size() == 1);
+	assert(r.getDogs()[0].getBreed() == "a");
+	assert(r.getDogs()[0].getName() == "b");
+	assert(r.getDogs()[0].getAge() == 1);
+	assert(r.getDogs()[0].getPhoto() == "f");
 }
 
 void Test::testCtrl() {
 	Controller c;
-	DynVec<Dog>* dogs = c.getRepo()->getDogs();
-	assert(dogs->getSize() == 0);
+	vector<Dog> dogs = c.getRepo()->getDogs();
+	assert(c.getRepo()->getDogs().size() == 0);
 
 	Dog d1{ "a", "b", 0, "c" };
 	Dog d2{ "x", "y", 0, "z" };
@@ -61,15 +63,15 @@ void Test::testCtrl() {
 	c.add(d2);
 	c.add(d3);
 	c.add(d4);
-	assert(dogs->getSize() == 4);
+	assert(c.getRepo()->getDogs().size() == 4);
 
 	c.adopt(d1);
-	assert(dogs->getSize() == 3);
-	assert(c.getAdopted().getSize() == 1);
+	assert(c.getRepo()->getDogs().size() == 3);
+	assert(c.getAdopted().size() == 1);
 
-	assert(c.filter("a", 10).getSize() == 1);
-	assert(c.filter("m", 10).getSize() == 2);
-	assert(c.filter("a", 0).getSize() == 0);
+	assert(c.filter("a", 10).size() == 1);
+	assert(c.filter("m", 10).size() == 2);
+	assert(c.filter("a", 0).size() == 0);
 }
 
 void Test::testAll() {

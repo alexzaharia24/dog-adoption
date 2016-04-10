@@ -1,11 +1,10 @@
 #pragma once	
-
+#include <vector>
 #include "Dog.h"
-#include "DynVec.h"
 
 class Repository {
 private:
-	DynVec<Dog>* dogs;
+	vector<Dog> dogs;
 public:
 	/* CONSTRUCTORS */
 	Repository();
@@ -14,7 +13,7 @@ public:
 	/* Repository destructor */
 
 	/* GETTERS */
-	DynVec<Dog>* getDogs();
+	vector<Dog> getDogs();
 	/* Get a pointer to the vector of dogs. */
 
 	/* OPERATIONS */

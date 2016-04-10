@@ -1,10 +1,11 @@
 #pragma once
+#include <vector>
 #include "Repository.h"
 
 class Controller {
 private:
 	Repository* repo;
-	DynVec<Dog> adopted;
+	vector<Dog> adopted;
 public:
 	/* CONTSTRUCTORS */
 	Controller();
@@ -15,7 +16,7 @@ public:
 	/* GETTERS */
 	Repository* getRepo();
 	/* Get a refference to the repository. */
-	DynVec<Dog> getAdopted();
+	vector<Dog> getAdopted();
 	/* Get the list of adopted dogs. */
 
 	/* OPERATIONS */
@@ -28,7 +29,7 @@ public:
 	void adopt(Dog d);
 	/* User adopts a dog. The adopted dog will be deleted from the initial list and added to the adopted dogs list.
 		Input:	d (Dog) - the dog to be adopted */
-	DynVec<Dog> filter(string breed, int age);
+	vector<Dog> filter(string breed, int age);
 	/* Filter the list of dogs. Return the list of dogs that have a given breed and whose age is smaller than the given one. 
 		Input:	breed (string)  - the given breed 
 				age (int)		- the given age

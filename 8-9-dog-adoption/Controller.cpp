@@ -12,7 +12,7 @@ Controller::~Controller() {
 Repository * Controller::getRepo() {
 	return this->repo;
 }
-DynVec<Dog> Controller::getAdopted() {
+vector<Dog> Controller::getAdopted() {
 	return this->adopted;
 }
 
@@ -28,23 +28,23 @@ std::string Controller::update(Dog d) {
 }
 
 void Controller::adopt(Dog d) {
-	adopted.add(d);
+	adopted.push_back(d);
 	repo->remove(d);
 }
-DynVec<Dog> Controller::filter(string breed, int age) {
-	DynVec<Dog>* in_shelter = this->getRepo()->getDogs();
-	DynVec<Dog> adopted = this->getAdopted();
-	DynVec<Dog> result;
-	for (int i = 0; i < in_shelter->getSize(); i++) {
-		Dog d((*in_shelter)[i]);
+vector<Dog> Controller::filter(string breed, int age) {
+	vector<Dog> in_shelter = this->getRepo()->getDogs();
+	vector<Dog> adopted = this->getAdopted();
+	vector<Dog> result;
+	for (unsigned i = 0; i < in_shelter.size(); i++) {
+		Dog d(in_shelter[i]);
 		if (d.getBreed() == breed && d.getAge() < age) {
-			result.add(d);
+			result.push_back(d);
 		}
 	}
-	for (int i = 0; i < adopted.getSize(); i++) {
+	for (unsigned i = 0; i < adopted.size(); i++) {
 		Dog d(adopted[i]);
 		if (d.getBreed() == breed && d.getAge() < age) {
-			result.add(d);
+			result.push_back(d);
 		}
 	}
 	return result;
