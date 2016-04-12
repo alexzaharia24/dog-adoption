@@ -35,14 +35,14 @@ vector<Dog> Controller::filter(string breed, int age) {
 	vector<Dog> in_shelter = this->getRepo()->getDogs();
 	vector<Dog> adopted = this->getAdopted();
 	vector<Dog> result;
-	for (unsigned i = 0; i < in_shelter.size(); i++) {
-		Dog d(in_shelter[i]);
+	for (auto i : in_shelter) {
+		Dog d(i);
 		if (d.getBreed() == breed && d.getAge() < age) {
 			result.push_back(d);
 		}
 	}
-	for (unsigned i = 0; i < adopted.size(); i++) {
-		Dog d(adopted[i]);
+	for (auto i : adopted) {
+		Dog d(i);
 		if (d.getBreed() == breed && d.getAge() < age) {
 			result.push_back(d);
 		}

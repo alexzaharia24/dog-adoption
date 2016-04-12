@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "UI.h"
 
 using namespace std;
@@ -9,6 +10,16 @@ UI::UI() {
 }
 UI::~UI() {
 	delete ctrl;
+}
+
+/* OPERATIONS */
+void UI::printShelterDogs() {
+	for (auto d : this->ctrl->getRepo()->getDogs())
+		cout << d << "\n";
+}
+void UI::printAdoptedDogs() {
+	for (auto d : this->ctrl->getAdopted())
+		cout << d << "\n";
 }
 
 /* MENU */
@@ -242,32 +253,41 @@ int UI::mainExecute(string cmd) {
 	}
 }
 
+void readFromFile(string fname, Controller* ctrl) {
+	ifstream fin;
+	string b, n, p, sep;
+	int a;
+	
+	fin.open(fname, std::fstream::in);
+
+	while (!fin.eof()) {
+		fin >> b >> sep >> n >> sep >> a >> sep >> p;
+		ctrl->add(Dog{ b,n,a,p });
+		/*cout << b << " " << n << " " << a << " " << p << "\n";*/
+	}
+
+	fin.close();
+}
+
+void writeToFile(string fname, Controller* ctrl) {
+	ofstream fout;
+	fout.open(fname);
+	for (auto i : ctrl->getRepo()->getDogs()) {
+		fout << i << "\n";
+	}
+	fout.close();
+}
+
 void UI::mainMenu() {
-	string cmd; 
+	string cmd, fname = "dogs.txt";
 
-	Dog d1("Husky", "Sven", 4, "http://goo.gl/647s1X");
-	Dog d2("Wolf", "Lycan", 6, "http://goo.gl/PUxwwT");
-	Dog d3("Rotweiller", "Knight", 3, "https://goo.gl/5oIYRa");
-	Dog d4("Husky", "Sven", 5, "http://goo.gl/hCINq1");
-
-	this->ctrl->add(d1);
-	this->ctrl->add(d2);
-	this->ctrl->add(d3);
-	this->ctrl->update(d4);
+	readFromFile(fname, this->ctrl);
 	
 	do { 
 		menuCommands();
 		cmd = readCmd();
 	} while (!mainExecute(cmd));
 
+	writeToFile(fname, this->ctrl);
 }
 
-/* OPERATIONS */
-void UI::printShelterDogs() {
-	for (auto d : this->ctrl->getRepo()->getDogs())
-		cout << d << "\n";
-}
-void UI::printAdoptedDogs() {
-	for (auto d : this->ctrl->getAdopted())
-		cout << d << "\n";
-}

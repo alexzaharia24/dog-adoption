@@ -29,7 +29,6 @@ void Test::testRepo() {
 
 	assert(r.getDogs().size() == 0);
 	r.add(d1);
-	cout << r.getDogs().size();
 	assert(r.getDogs().size() == 1);
 	r.add(d1);
 	assert(r.getDogs().size() == 1);

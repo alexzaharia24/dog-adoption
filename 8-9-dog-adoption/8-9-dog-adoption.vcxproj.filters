@@ -41,9 +41,6 @@
     <ClInclude Include="Dog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DynVec.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Repository.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -1,0 +1,4 @@
+Sven | Husky | 4 | "http://goo.gl/647s1X"
+Lycan | Wolf | 6 | "http://goo.gl/PUxwwT"
+Knight | Rotweiller | 3 | "https://goo.gl/5oIYRa"
+b | a | 1 | c

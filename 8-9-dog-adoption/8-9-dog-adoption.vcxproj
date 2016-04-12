@@ -107,7 +107,6 @@
   <ItemGroup>
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Dog.h" />
-    <ClInclude Include="DynVec.h" />
     <ClInclude Include="Repository.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="UI.h" />
