@@ -8,9 +8,10 @@ private:
 	Repository* repo;
 	vector<Dog> adopted;
 	DogValidator validator;
+	string export_type;
 public:
 	/* CONTSTRUCTORS */
-	Controller();
+	Controller(string export_type);
 	/* Controller constructor. */
 	~Controller();
 	/* Controller destructor. */

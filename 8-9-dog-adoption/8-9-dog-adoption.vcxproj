@@ -102,6 +102,7 @@
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="DogValidator.cpp" />
     <ClCompile Include="Repository.cpp" />
+    <ClCompile Include="RepositoryExceptions.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
@@ -110,6 +111,7 @@
     <ClInclude Include="Dog.h" />
     <ClInclude Include="DogValidator.h" />
     <ClInclude Include="Repository.h" />
+    <ClInclude Include="RepositoryExceptions.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>

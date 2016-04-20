@@ -6,7 +6,7 @@ private:
 	Controller* ctrl;
 public:
 	/* CONSTRUCTORS */
-	UI();
+	UI(string export_type);
 	/* Constructor for the UI */
 	~UI();
 	/* Destructor for the UI */

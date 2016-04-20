@@ -1,8 +1,11 @@
+#include <algorithm>
+#include <iterator>
 #include "Controller.h"
 
 /* CONSTRUCTORS */
-Controller::Controller() {
+Controller::Controller(string export_type) {
 	this->repo = new Repository();
+	this->export_type = export_type;
 }
 Controller::~Controller() {
 	delete repo;
@@ -55,7 +58,10 @@ vector<Dog> Controller::filter(string breed, int age) {
 	vector<Dog> result;
 
 	if (breed == "" || breed == "\n") {
-		for (auto i : in_shelter) {
+		copy_if(in_shelter.begin(), in_shelter.end(), back_inserter(result), [=](Dog& d) { return 1; });
+		copy_if(adopted.begin(), adopted.end(), back_inserter(result), [=](Dog& d) { return 1; });
+
+		/*for (auto i : in_shelter) {
 			Dog d(i);
 			result.push_back(d);
 		}
@@ -63,9 +69,12 @@ vector<Dog> Controller::filter(string breed, int age) {
 			Dog d(i);
 			result.push_back(d);
 		}
-		return result;
+		return result;*/
 	}
-	for (auto i : in_shelter) {
+	copy_if(in_shelter.begin(), in_shelter.end(), back_inserter(result), [=](Dog& d) { return d.getBreed() == breed && d.getAge() < age; });
+	copy_if(adopted.begin(), adopted.end(), back_inserter(result), [=](Dog& d) { return d.getBreed() == breed && d.getAge() < age; });
+	/*for (auto i : in_shelter) {
+
 		Dog d(i);
 		if (d.getBreed() == breed && d.getAge() < age) {
 			result.push_back(d);
@@ -76,7 +85,7 @@ vector<Dog> Controller::filter(string breed, int age) {
 		if (d.getBreed() == breed && d.getAge() < age) {
 			result.push_back(d);
 		}
-	}
+	}*/
 	return result;
 }
 

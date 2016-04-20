@@ -1,12 +1,14 @@
 #include <iostream>
+#include <algorithm>
+#include <cstring>
 #include <fstream>
 #include "UI.h"
+#include "RepositoryExceptions.h"
 
-using namespace std;
 
 /* CONSTRUCTORS */
-UI::UI() {
-	this->ctrl = new Controller();
+UI::UI(string export_type) {
+	this->ctrl = new Controller(export_type);
 }
 UI::~UI() {
 	delete ctrl;
@@ -61,6 +63,7 @@ void adminCommands() {
 	cout << "\n";
 }
 int UI::adminExecute(string cmd) {
+	string fname = "dogs.txt";
 	if (cmd == "exit") {
 		cout << "\n";
 		return 1;
@@ -83,14 +86,23 @@ int UI::adminExecute(string cmd) {
 		cin >> photo;
 
 		cout << "\n";
-		response = this->ctrl->add(Dog{ breed, name, age, photo });
-		if (response[0] != "Dog added with success." &&
-			response[0] != "Dog already in the list. Cannot add.") {
-			cout << ">>> Incorrect dog. Cannot add. <<< \n";
+		try {
+			response = this->ctrl->add(Dog{ breed, name, age, photo });
+			if (response[0] != "Dog added with success." &&
+				response[0] != "Dog already in the list. Cannot add.") {
+				cout << ">>> Incorrect dog. Cannot add. <<< \n";
+			}
+			printResponse(response);
+			cout << "\n";
+			ctrl->getRepo()->writeToFile(fname);
 		}
-		printResponse(response);
+		catch (RepositoryException& e) {
+			cout << e.what() << "\n";
+		}
+		catch (FileException& e) {
+			cout << e.what() << "\n";
+		}
 
-		cout << "\n";
 		return 0;
 	}
 	else if (cmd == "rem") {
@@ -103,14 +115,22 @@ int UI::adminExecute(string cmd) {
 		cin >> name;
 
 		cout << "\n";
-		response = this->ctrl->remove(Dog{ breed, name, 0, "http" });
-		if (response[0] != "Dog removed with success." &&
-			response[0] != "Dog not in the list. Cannot remove.") {
-			cout << ">>> Incorrect dog. Cannot remove. <<< \n";
+		try {
+			response = this->ctrl->remove(Dog{ breed, name, 0, "http" });
+			if (response[0] != "Dog removed with success." &&
+				response[0] != "Dog not in the list. Cannot remove.") {
+				cout << ">>> Incorrect dog. Cannot remove. <<< \n";
+			}
+			printResponse(response);
+			cout << "\n";
+			ctrl->getRepo()->writeToFile(fname);
 		}
-		printResponse(response);
-
-		cout << "\n";
+		catch (RepositoryException& e) {
+			cout << e.what() << "\n";
+		}
+		catch (FileException& e) {
+			cout << e.what() << "\n";
+		}
 		return 0;
 	}
 	else if (cmd == "upd") {
@@ -131,13 +151,22 @@ int UI::adminExecute(string cmd) {
 		cin >> photo;
 
 		cout << "\n";
-		response = this->ctrl->remove(Dog{ breed, name, age, photo});
-		if (response[0] != "Dog updated with success." &&
-			response[0] != "Dog not in the list. Cannot update." ) {
-			cout << ">>> Incorrect dog. Cannot update. <<< \n";
+		try {
+			response = this->ctrl->remove(Dog{ breed, name, age, photo });
+			if (response[0] != "Dog updated with success." &&
+				response[0] != "Dog not in the list. Cannot update.") {
+				cout << ">>> Incorrect dog. Cannot update. <<< \n";
+			}
+			printResponse(response);
+			cout << "\n";
+			ctrl->getRepo()->writeToFile(fname);
 		}
-		printResponse(response);
-
+		catch (RepositoryException& e) {
+			cout << e.what() << "\n";
+		}
+		catch (FileException& e) {
+			cout << e.what() << "\n";
+		}
 		return 0;
 	}
 	else if (cmd == "show") {
@@ -186,10 +215,7 @@ int UI::userExecute(string cmd) {
 		int age;
 
 		cout << "breed = ";
-		getline(cin, breed);
-		cin.ignore();
-		cout << "<<" << breed << "\n";
-
+		cin >> breed;
 		cout << "age = ";
 		age = readNumber();
 		if (age == -1) {
@@ -305,41 +331,18 @@ int UI::mainExecute(string cmd) {
 	}
 }
 
-void readFromFile(string fname, Controller* ctrl) {
-	ifstream fin;
-	string b, n, p, sep;
-	int a;
-	
-	fin.open(fname, std::fstream::in);
 
-	while (!fin.eof()) {
-		fin >> b >> sep >> n >> sep >> a >> sep >> p;
-		ctrl->add(Dog{ b,n,a,p });
-		/*cout << b << " " << n << " " << a << " " << p << "\n";*/
-	}
-
-	fin.close();
-}
-
-void writeToFile(string fname, Controller* ctrl) {
-	ofstream fout;
-	fout.open(fname);
-	for (auto i : ctrl->getRepo()->getDogs()) {
-		fout << i << "\n";
-	}
-	fout.close();
-}
 
 void UI::mainMenu() {
 	string cmd, fname = "dogs.txt";
 
-	readFromFile(fname, this->ctrl);
+	ctrl->getRepo()->readFromFile(fname);
 	
 	do { 
 		menuCommands();
 		cmd = readCmd();
 	} while (!mainExecute(cmd));
 
-	writeToFile(fname, this->ctrl);
+	ctrl->getRepo()->writeToFile(fname);
 }
 

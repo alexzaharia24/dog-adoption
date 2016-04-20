@@ -55,7 +55,7 @@ void Test::testRepo() {
 }
 
 void Test::testCtrl() {
-	Controller c;
+	Controller c("");
 	vector<Dog> dogs = c.getRepo()->getDogs();
 	assert(c.getRepo()->getDogs().size() == 0);
 

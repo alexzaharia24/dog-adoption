@@ -32,4 +32,8 @@ public:
 	Input: d (Dog) - the dog to be updated.
 	Output: "Dog updated with success." - if the update was successfull
 		"Dog not in the list. Cannot update." - if there isn't such a dog in the list */
+
+	/* FILE IO */
+	void readFromFile(string fname);
+	void writeToFile(string fname);
 };
