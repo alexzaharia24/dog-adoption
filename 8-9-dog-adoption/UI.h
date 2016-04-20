@@ -42,4 +42,5 @@ public:
 	/* Print the list of dogs that are not adopted, each dog on a line. */
 	void printAdoptedDogs();
 	/* Print the list of dogs that are adopted, each dog on a line. */
+	void printResponse(std::vector<std::string>);
 };

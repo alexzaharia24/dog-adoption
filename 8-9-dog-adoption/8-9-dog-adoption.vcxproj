@@ -100,6 +100,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Dog.cpp" />
+    <ClCompile Include="DogValidator.cpp" />
     <ClCompile Include="Repository.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -107,6 +108,7 @@
   <ItemGroup>
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Dog.h" />
+    <ClInclude Include="DogValidator.h" />
     <ClInclude Include="Repository.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="UI.h" />

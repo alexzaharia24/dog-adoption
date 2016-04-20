@@ -11,27 +11,40 @@ vector<Dog> Repository::getDogs() {
 }
 
 /* OPERATIONS */
-std::string Repository::add(Dog d) {
+std::vector<string> Repository::add(Dog d) {
 	vector<Dog>::iterator found = find(this->dogs.begin(), this->dogs.end(), d);
+	vector<string> response;
+
 	if (found != dogs.end()) {
-		return "Dog already in the list. Cannot add.";
+		response.push_back("Dog already in the list. Cannot add.");
+		return response;
 	}
 	this->dogs.push_back(d);
-	return "Dog added with success.";
+	response.push_back("Dog added with success.");
+	return response;
+
 }
-std::string Repository::remove(Dog d) {
+std::vector<std::string> Repository::remove(Dog d) {
 	vector<Dog>::iterator found = find(this->dogs.begin(), this->dogs.end(), d);
+	vector<string> response;
+
 	if (found == dogs.end()) {
-		return "Dog not in the list. Cannot remove.";
+		response.push_back("Dog not in the list. Cannot remove.");
+		return response;
 	}
 	this->dogs.erase(found);
-	return "Dog removed with success.";
+	response.push_back("Dog removed with success.");
+	return response;
 }
-std::string Repository::update(Dog d) {
+std::vector<std::string> Repository::update(Dog d) {
 	vector<Dog>::iterator found = find(this->dogs.begin(), this->dogs.end(), d);
+	vector<string> response;
+	
 	if (found == dogs.end()) {
-		return "Dog not in the list. Cannot update.";
+		response.push_back("Dog not in the list. Cannot update.");
+		return response;
 	}
 	*found = d;
-	return "Dog updated with success.";
+	response.push_back("Dog updated with success.");
+	return response;
 }

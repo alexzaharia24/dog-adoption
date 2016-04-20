@@ -17,13 +17,31 @@ vector<Dog> Controller::getAdopted() {
 }
 
 /* OPERATIONS*/
-std::string Controller::add(Dog d) {
+vector<string> Controller::add(Dog d) {
+	try {
+		this->validator.validate(d);
+	}
+	catch (DogException& e) {
+		return e.getErrors();
+	}
 	return this->repo->add(d);
 }
-std::string Controller::remove(Dog d) {
+vector<string> Controller::remove(Dog d) {
+	try {
+		this->validator.validate(d);
+	}
+	catch (DogException& e) {
+		return e.getErrors();
+	}
 	return this->repo->remove(d);
 }
-std::string Controller::update(Dog d) {
+vector<string> Controller::update(Dog d) {
+	try {
+		this->validator.validate(d);
+	}
+	catch (DogException& e) {
+		return e.getErrors();
+	}
 	return this->repo->update(d);
 }
 
@@ -35,6 +53,18 @@ vector<Dog> Controller::filter(string breed, int age) {
 	vector<Dog> in_shelter = this->getRepo()->getDogs();
 	vector<Dog> adopted = this->getAdopted();
 	vector<Dog> result;
+
+	if (breed == "" || breed == "\n") {
+		for (auto i : in_shelter) {
+			Dog d(i);
+			result.push_back(d);
+		}
+		for (auto i : adopted) {
+			Dog d(i);
+			result.push_back(d);
+		}
+		return result;
+	}
 	for (auto i : in_shelter) {
 		Dog d(i);
 		if (d.getBreed() == breed && d.getAge() < age) {

@@ -1,11 +1,13 @@
 #pragma once
 #include <vector>
 #include "Repository.h"
+#include "DogValidator.h"
 
 class Controller {
 private:
 	Repository* repo;
 	vector<Dog> adopted;
+	DogValidator validator;
 public:
 	/* CONTSTRUCTORS */
 	Controller();
@@ -20,11 +22,11 @@ public:
 	/* Get the list of adopted dogs. */
 
 	/* OPERATIONS */
-	std::string add(Dog d);
+	std::vector<std::string> add(Dog d);
 	/* Add a dog to the list of dogs. */
-	std::string remove(Dog d);
+	std::vector<std::string> remove(Dog d);
 	/* Remove a dog from the list of dogs. */
-	std::string update(Dog d);
+	std::vector<std::string> update(Dog d);
 	/* Update a dog from the list of dogs. */
 	void adopt(Dog d);
 	/* User adopts a dog. The adopted dog will be deleted from the initial list and added to the adopted dogs list.

@@ -21,7 +21,11 @@ void UI::printAdoptedDogs() {
 	for (auto d : this->ctrl->getAdopted())
 		cout << d << "\n";
 }
-
+void UI::printResponse(vector<string> response) {
+	for (auto r : response) {
+		cout << r;
+	}
+}
 /* MENU */
 string readCmd() {
 	/* Read a command from the user.
@@ -30,6 +34,21 @@ string readCmd() {
 	cout << ">> Enter a command\n";
 	cin >> cmd;
 	return cmd;
+}
+
+int readNumber() {
+	/*	Read a number from the user.
+			Output: nr (int) - the read number
+					-1 (int) - for bad input. */
+	int x;
+	cin >> x;
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "You need to enter a number. \n";
+		return -1;
+	}
+	return x;
 }
 
 void adminCommands() {
@@ -48,6 +67,7 @@ int UI::adminExecute(string cmd) {
 	}
 	else if (cmd == "add") {
 		string breed, name, photo;
+		vector<string> response;
 		int age;
 
 		cout << "breed = ";
@@ -55,41 +75,68 @@ int UI::adminExecute(string cmd) {
 		cout << "name = ";
 		cin >> name;
 		cout << "age = ";
-		cin >> age;
+		age = readNumber();
+		if (age == -1) {
+			return 0;
+		}
 		cout << "photo = ";
 		cin >> photo;
 
-		cout << this->ctrl->add(Dog{ breed, name, age, photo });
+		cout << "\n";
+		response = this->ctrl->add(Dog{ breed, name, age, photo });
+		if (response[0] != "Dog added with success." &&
+			response[0] != "Dog already in the list. Cannot add.") {
+			cout << ">>> Incorrect dog. Cannot add. <<< \n";
+		}
+		printResponse(response);
 
 		cout << "\n";
 		return 0;
 	}
 	else if (cmd == "rem") {
 		string breed, name;
+		vector<string> response;
 
 		cout << "breed = ";
 		cin >> breed;
 		cout << "name = ";
 		cin >> name;
 
-		cout << this->ctrl->remove(Dog{ breed, name, 0, "" });
+		cout << "\n";
+		response = this->ctrl->remove(Dog{ breed, name, 0, "http" });
+		if (response[0] != "Dog removed with success." &&
+			response[0] != "Dog not in the list. Cannot remove.") {
+			cout << ">>> Incorrect dog. Cannot remove. <<< \n";
+		}
+		printResponse(response);
+
 		cout << "\n";
 		return 0;
 	}
 	else if (cmd == "upd") {
 		string breed, name, photo;
 		int age;
+		vector<string> response;
 
 		cout << "breed = ";
 		cin >> breed;
 		cout << "name = ";
 		cin >> name;
 		cout << "age = ";
-		cin >> age;
+		age = readNumber();
+		if (age == -1) {
+			return 0;
+		}
 		cout << "photo = ";
 		cin >> photo;
 
-		cout << this->ctrl->update(Dog{ breed, name, age, photo });
+		cout << "\n";
+		response = this->ctrl->remove(Dog{ breed, name, age, photo});
+		if (response[0] != "Dog updated with success." &&
+			response[0] != "Dog not in the list. Cannot update." ) {
+			cout << ">>> Incorrect dog. Cannot update. <<< \n";
+		}
+		printResponse(response);
 
 		return 0;
 	}
@@ -137,12 +184,17 @@ int UI::userExecute(string cmd) {
 	else if (cmd == "fil") {
 		string breed;
 		int age;
-		cout << "Filter dogs\n";
 
 		cout << "breed = ";
-		cin >> breed;
+		getline(cin, breed);
+		cin.ignore();
+		cout << "<<" << breed << "\n";
+
 		cout << "age = ";
-		cin >> age;
+		age = readNumber();
+		if (age == -1) {
+			return 0;
+		}
 		cout << "\n";
 
 		vector<Dog> result = this->ctrl->filter(breed, age);
