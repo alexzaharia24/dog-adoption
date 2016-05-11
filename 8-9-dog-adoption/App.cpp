@@ -7,18 +7,11 @@ using namespace std;
 
 class App {
 private:
-	UI* ui;
+	UI ui;
 public:
-	App(string export_type) {
-		this->ui = new UI(export_type);
-	}
-	~App() {
-		delete this->ui;
-	}
-	
+	App(const UI& ui) : ui{ ui } {}
 	void run() {
-		
-		ui->mainMenu();
+		ui.mainMenu();
 	}
 };
 
@@ -46,7 +39,11 @@ int main() {
 	string export_type;
 	export_type = chooseExportType();
 
-	App app(export_type);
+	Repository repo;
+	AdoptionList* adop = new AdoptionList();
+	Controller ctrl(repo, adop, export_type);
+	UI ui(ctrl);
+	App app(ui);
 	app.run();
 
 	system("pause");

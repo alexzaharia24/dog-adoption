@@ -1,3 +1,2 @@
-Husky | Sven | 4 | http://goo.gl/647s1X
-Wolf | Lycan | 6 | http://goo.gl/PUxwwT
-Rotweiller | Knight | 3 | http://goo.gl/5oIYRa
+Husky | Name | 1 | http
+Name | Breed | 1 | http

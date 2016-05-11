@@ -55,23 +55,25 @@ void Test::testRepo() {
 }
 
 void Test::testCtrl() {
-	Controller c("");
-	vector<Dog> dogs = c.getRepo()->getDogs();
-	assert(c.getRepo()->getDogs().size() == 0);
+	Repository r;
+	AdoptionList* a = new AdoptionList();
+	Controller c(r, a, "");
+	vector<Dog> dogs = c.getRepo().getDogs();
+	assert(c.getRepo().getDogs().size() == 0);
 
 	Dog d1{ "abc", "Abc", 1, "http" };
 	Dog d2{ "def", "Def", 2, "www" };
 	Dog d3{ "ghi", "Ghi", 3, "http" };
 	Dog d4{ "def", "Jkl", 4, "www" };
 
-	c.add(d1);
-	c.add(d2);
-	c.add(d3);
-	c.add(d4);
-	assert(c.getRepo()->getDogs().size() == 4);
+	c.addDogToRepository(d1);
+	c.addDogToRepository(d2);
+	c.addDogToRepository(d3);
+	c.addDogToRepository(d4);
+	assert(c.getRepo().getDogs().size() == 4);
 
-	c.adopt(d1);
-	assert(c.getRepo()->getDogs().size() == 3);
+	c.addDogToAdoptionList(d1);
+	assert(c.getRepo().getDogs().size() == 3);
 	assert(c.getAdopted().size() == 1);
 
 	assert(c.filter("abc", 10).size() == 1);

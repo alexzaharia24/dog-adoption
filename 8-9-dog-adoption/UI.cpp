@@ -7,20 +7,17 @@
 
 
 /* CONSTRUCTORS */
-UI::UI(string export_type) {
-	this->ctrl = new Controller(export_type);
-}
-UI::~UI() {
-	delete ctrl;
-}
+//UI::~UI() {
+//	delete ctrl;
+//}
 
 /* OPERATIONS */
 void UI::printShelterDogs() {
-	for (auto d : this->ctrl->getRepo()->getDogs())
+	for (auto d : this->ctrl.getRepo().getDogs())
 		cout << d << "\n";
 }
 void UI::printAdoptedDogs() {
-	for (auto d : this->ctrl->getAdopted())
+	for (auto d : this->ctrl.getAdopted())
 		cout << d << "\n";
 }
 void UI::printResponse(vector<string> response) {
@@ -87,14 +84,14 @@ int UI::adminExecute(string cmd) {
 
 		cout << "\n";
 		try {
-			response = this->ctrl->add(Dog{ breed, name, age, photo });
+			response = this->ctrl.addDogToRepository(Dog{ breed, name, age, photo });
 			if (response[0] != "Dog added with success." &&
 				response[0] != "Dog already in the list. Cannot add.") {
 				cout << ">>> Incorrect dog. Cannot add. <<< \n";
 			}
 			printResponse(response);
 			cout << "\n";
-			ctrl->getRepo()->writeToFile(fname);
+			ctrl.getRepo().writeToFile(fname);
 		}
 		catch (RepositoryException& e) {
 			cout << e.what() << "\n";
@@ -116,14 +113,14 @@ int UI::adminExecute(string cmd) {
 
 		cout << "\n";
 		try {
-			response = this->ctrl->remove(Dog{ breed, name, 0, "http" });
+			response = this->ctrl.removeDogFromRepository(Dog{ breed, name, 0, "http" });
 			if (response[0] != "Dog removed with success." &&
 				response[0] != "Dog not in the list. Cannot remove.") {
 				cout << ">>> Incorrect dog. Cannot remove. <<< \n";
 			}
 			printResponse(response);
 			cout << "\n";
-			ctrl->getRepo()->writeToFile(fname);
+			ctrl.getRepo().writeToFile(fname);
 		}
 		catch (RepositoryException& e) {
 			cout << e.what() << "\n";
@@ -152,14 +149,14 @@ int UI::adminExecute(string cmd) {
 
 		cout << "\n";
 		try {
-			response = this->ctrl->remove(Dog{ breed, name, age, photo });
+			response = this->ctrl.updateDogFromRepository(Dog{ breed, name, age, photo });
 			if (response[0] != "Dog updated with success." &&
 				response[0] != "Dog not in the list. Cannot update.") {
 				cout << ">>> Incorrect dog. Cannot update. <<< \n";
 			}
 			printResponse(response);
 			cout << "\n";
-			ctrl->getRepo()->writeToFile(fname);
+			ctrl.getRepo().writeToFile(fname);
 		}
 		catch (RepositoryException& e) {
 			cout << e.what() << "\n";
@@ -205,7 +202,7 @@ int UI::userExecute(string cmd) {
 		return 1;
 	}
 	else if (cmd == "bro") {
-		vector<Dog> dogs = this->ctrl->getRepo()->getDogs();
+		vector<Dog> dogs = this->ctrl.getRepo().getDogs();
 		browseDogsMenu(dogs);
 		cout << "\n";
 		return 0;
@@ -223,7 +220,7 @@ int UI::userExecute(string cmd) {
 		}
 		cout << "\n";
 
-		vector<Dog> result = this->ctrl->filter(breed, age);
+		vector<Dog> result = this->ctrl.filter(breed, age);
 		if (result.size() == 0) {
 			cout << "No such dogs.";
 		}
@@ -236,10 +233,10 @@ int UI::userExecute(string cmd) {
 	}
 	else if (cmd == "lis") {
 		cout << "\n=== Adoption list. === \n";
-		if (this->ctrl->getAdopted().size() == 0) {
+		if (this->ctrl.getAdopted().size() == 0) {
 			cout << "\nNo adoption yet.";
 		}
-		browseDogsMenu(this->ctrl->getAdopted());
+		browseDogsMenu(this->ctrl.getAdopted());
 		return 0;
 	}
 	else {
@@ -288,7 +285,7 @@ void UI::browseDogsMenu(vector<Dog> dogs) {
 		else if (cmd == "ado") {
 			cout << "\n";
 			cout << ">>> "<<d.getName() << " was adopted.\n";
-			this->ctrl->adopt(d);
+			this->ctrl.addDogToAdoptionList(d);
 			continue;
 		}
 		else if (cmd == "next") {
@@ -336,13 +333,13 @@ int UI::mainExecute(string cmd) {
 void UI::mainMenu() {
 	string cmd, fname = "dogs.txt";
 
-	ctrl->getRepo()->readFromFile(fname);
+	ctrl.getRepo().readFromFile(fname);
 	
 	do { 
 		menuCommands();
 		cmd = readCmd();
 	} while (!mainExecute(cmd));
 
-	ctrl->getRepo()->writeToFile(fname);
+	ctrl.getRepo().writeToFile(fname);
 }
 

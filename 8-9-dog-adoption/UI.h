@@ -3,12 +3,12 @@
 
 class UI {
 private:
-	Controller* ctrl;
+	Controller ctrl;
 public:
 	/* CONSTRUCTORS */
-	UI(string export_type);
+	UI(const Controller& c) : ctrl{ c } {}
 	/* Constructor for the UI */
-	~UI();
+	//~UI();
 	/* Destructor for the UI */
 
 

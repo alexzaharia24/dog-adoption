@@ -46,6 +46,9 @@ std::vector<std::string> Repository::update(Dog d) {
 		response.push_back("Dog not in the list. Cannot update.");
 		return response;
 	}
+	if (d.getPhoto() == "http" || d.getPhoto() == "www") {
+		d.setPhoto(found->getPhoto());
+	}
 	*found = d;
 	response.push_back("Dog updated with success.");
 	return response;

@@ -97,6 +97,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdoptionList.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Dog.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdoptionList.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="DogValidator.h" />

@@ -1,35 +1,40 @@
 #pragma once
 #include <vector>
-#include "Repository.h"
 #include "DogValidator.h"
+#include "Repository.h"
+#include "AdoptionList.h"
 
 class Controller {
 private:
-	Repository* repo;
-	vector<Dog> adopted;
+	Repository repo;
+	AdoptionList *adoptionList;
 	DogValidator validator;
 	string export_type;
 public:
 	/* CONTSTRUCTORS */
-	Controller(string export_type);
+	Controller(const Repository& r, AdoptionList *a, string e) : repo{ r }, adoptionList{ a }, export_type{ e } {};
 	/* Controller constructor. */
 	~Controller();
 	/* Controller destructor. */
 
 	/* GETTERS */
-	Repository* getRepo();
+	Repository& getRepo();
 	/* Get a refference to the repository. */
 	vector<Dog> getAdopted();
 	/* Get the list of adopted dogs. */
+	AdoptionList* getAdoptionList() const;
+	/* Get object to the adoption list. */
 
 	/* OPERATIONS */
-	std::vector<std::string> add(Dog d);
-	/* Add a dog to the list of dogs. */
-	std::vector<std::string> remove(Dog d);
+	std::vector<std::string> addDogToRepository(Dog dog);
+	/* Add a dog to the whole list of dogs. */
+	std::vector<std::string> addDogToAdoptionList(const Dog& dog);
+	/* Add a dog to the adoption list. */
+	std::vector<std::string> removeDogFromRepository(Dog d);
 	/* Remove a dog from the list of dogs. */
-	std::vector<std::string> update(Dog d);
+	std::vector<std::string> updateDogFromRepository(Dog d);
 	/* Update a dog from the list of dogs. */
-	void adopt(Dog d);
+	//void adopt(Dog d);
 	/* User adopts a dog. The adopted dog will be deleted from the initial list and added to the adopted dogs list.
 		Input:	d (Dog) - the dog to be adopted */
 	vector<Dog> filter(string breed, int age);
