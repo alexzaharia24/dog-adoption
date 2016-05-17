@@ -18,9 +18,15 @@ void CSVAdoptionList::writeToFile(string fname) {
 	fout.close();
 }
 
-void CSVAdoptionList::displayAdoptionList() const
+void CSVAdoptionList::displayAdoptionList(string prog) const
 {
 	string aux = "\"" + this->fname + "\"";
-	ShellExecute(NULL, NULL, "", aux.c_str(), NULL, SW_SHOWMINIMIZED);
+	if (prog == "2") {
+		ShellExecute(NULL, NULL, "excel.exe", aux.c_str(), NULL, SW_SHOWMINIMIZED);
+	}
+	else {
+		ShellExecute(NULL, NULL, "notepad.exe", aux.c_str(), NULL, SW_SHOWMINIMIZED);
+	}
+	
 }
 

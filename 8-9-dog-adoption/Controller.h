@@ -24,7 +24,7 @@ public:
 	/* Get the list of adopted dogs. */
 	AdoptionList* getAdoptionList() const;
 	/* Get object to the adoption list. */
-
+	string getExportType() const;
 	/* OPERATIONS */
 	std::vector<std::string> addDogToRepository(Dog dog);
 	/* Add a dog to the whole list of dogs. */
@@ -44,5 +44,5 @@ public:
 		Output: the list of dogs that match the criteria. */
 
 	void saveAdoptionListToFile(string fname);
-	void openAdoptionList();
+	void openAdoptionList(string prog);
 };

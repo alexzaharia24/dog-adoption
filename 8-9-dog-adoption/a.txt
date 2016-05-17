@@ -1,0 +1,2 @@
+Husky,Sven,1,http
+Wolf,Lycan,2,http

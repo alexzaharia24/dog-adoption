@@ -173,7 +173,7 @@ int UI::adminExecute(string cmd) {
 }
 void UI::adminMenu() {
 	string cmd;
-	
+
 	do {
 		cout << "\n";
 		adminCommands();
@@ -239,7 +239,7 @@ int UI::userExecute(string cmd) {
 		string fname;
 		cout << "Enter file name: ";
 		cin >> fname;
-		
+
 		try {
 			this->ctrl.saveAdoptionListToFile(fname);
 		}
@@ -251,7 +251,21 @@ int UI::userExecute(string cmd) {
 	}
 	else if (cmd == "opn") {
 		try {
-			this->ctrl.openAdoptionList();
+			if (this->ctrl.getExportType() == "CSV") {
+				string prog = "";
+				cout << "1 - Notepad\n";
+				cout << "2 - Excel\n";
+				cin >> prog;
+				while (prog != "1" && prog != "2") {
+					cout << "Wrong program.\n";
+					cin >> prog;
+				}
+				cout << "\n";
+				this->ctrl.openAdoptionList(prog);
+			}
+			else {
+				this->ctrl.openAdoptionList("");
+			}
 		}
 		catch (FileException& e) {
 			cout << e.what() << endl;

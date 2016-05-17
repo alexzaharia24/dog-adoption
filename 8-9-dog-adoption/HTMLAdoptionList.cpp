@@ -41,6 +41,6 @@ void HTMLAdoptionList::writeToFile(string fname) {
 	fout.close();
 }
 
-void HTMLAdoptionList::displayAdoptionList() const {
-	ShellExecuteA(NULL, NULL, "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe", this->fname.c_str(), NULL, SW_SHOWMAXIMIZED);
+void HTMLAdoptionList::displayAdoptionList(string prog) const {
+	ShellExecuteA(NULL, NULL, "firefox.exe", this->fname.c_str(), NULL, SW_SHOWMINIMIZED);
 }

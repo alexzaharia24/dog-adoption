@@ -18,7 +18,9 @@ vector<Dog> Controller::getAdopted() {
 AdoptionList* Controller::getAdoptionList() const {
 	return adoptionList;
 }
-
+string Controller::getExportType() const {
+	return this->export_type;
+}
 /* OPERATIONS*/
 std::vector<std::string> Controller::addDogToRepository(Dog dog)
 {
@@ -83,9 +85,9 @@ void Controller::saveAdoptionListToFile(string fname) {
 	this->adoptionList->writeToFile(fname);
 }
 
-void Controller::openAdoptionList() {
+void Controller::openAdoptionList(string prog) {
 	try {
-		this->adoptionList->displayAdoptionList();
+		this->adoptionList->displayAdoptionList(prog);
 	}
 	catch (exception e) {
 		cout << e.what() << endl;

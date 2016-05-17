@@ -1,4 +1,0 @@
-Husky,Sven,1,http
-Wolf,Lycan,2,http
-Bulldog,Axe,3,www
-Labrador,Azalor,4,http

@@ -4,6 +4,6 @@
 class CSVAdoptionList : public FileAdoptionList {
 public:	
 	void writeToFile(string fname) override;
-	void displayAdoptionList() const override;
+	void displayAdoptionList(string prog) const override;
 };
 

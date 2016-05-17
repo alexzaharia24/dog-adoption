@@ -10,5 +10,5 @@ public:
 
 	void setFileName(const std::string& fname);
 	virtual void writeToFile(string fname) = 0;
-	virtual void displayAdoptionList() const = 0;
+	virtual void displayAdoptionList(string prog) const = 0;
 };
