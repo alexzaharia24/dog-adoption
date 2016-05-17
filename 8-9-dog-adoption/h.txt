@@ -1,0 +1,27 @@
+<!Doctype HTML>
+<html>
+<head>
+<title> Adoption List </title>
+</head>
+<body> <table border='1'>
+<tr>
+<td> Breed </td>
+<td> Name </td>
+<td> Age </td>
+<td> Photo </td>
+</tr>
+<tr>
+<td> Husky </td>
+<td> Sven </td>
+<td> 1 </td>
+<td> http </td>
+</tr>
+<tr>
+<td> Wolf </td>
+<td> Lycan </td>
+<td> 2 </td>
+<td> http </td>
+</tr>
+</table>
+</body>
+</html>

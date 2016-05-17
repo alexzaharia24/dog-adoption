@@ -187,6 +187,7 @@ void userCommands() {
 	cout << "fil	- Filter dogs.\n";
 	cout << "lis	- See adoption list.\n";
 	cout << "sav	- Save adoption list to file. \n";
+	cout << "opn	- Open saved file. \n";
 	cout << "exit	- Go back to Main Menu.\n";
 	cout << "\n";
 }
@@ -248,7 +249,14 @@ int UI::userExecute(string cmd) {
 
 		cout << "Saved\n";
 	}
-
+	else if (cmd == "opn") {
+		try {
+			this->ctrl.openAdoptionList();
+		}
+		catch (FileException& e) {
+			cout << e.what() << endl;
+		}
+	}
 	else {
 		cout << ">> Wrong command\n";
 		cout << "\n";

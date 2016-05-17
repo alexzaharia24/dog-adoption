@@ -21,6 +21,6 @@ void CSVAdoptionList::writeToFile(string fname) {
 void CSVAdoptionList::displayAdoptionList() const
 {
 	string aux = "\"" + this->fname + "\"";
-	ShellExecute(NULL, NULL, "path", aux.c_str(), NULL, SW_SHOWMINIMIZED);
+	ShellExecute(NULL, NULL, "", aux.c_str(), NULL, SW_SHOWMINIMIZED);
 }
 

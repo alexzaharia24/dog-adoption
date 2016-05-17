@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "UI.h"
 #include "CSVAdoptionList.h"
+#include "HTMLAdoptionList.h"
 #include "Test.h"
 
 using namespace std;
@@ -39,9 +40,16 @@ int main() {
 
 	string export_type;
 	export_type = chooseExportType();
+	FileAdoptionList* adop;
+
+	if (export_type == "CSV") {
+		adop = new CSVAdoptionList();
+	}
+	else {
+		adop = new HTMLAdoptionList();
+	}
 
 	Repository repo;
-	FileAdoptionList* adop = new CSVAdoptionList();
 	Controller ctrl(repo, adop, export_type);
 	UI ui(ctrl);
 	App app(ui);

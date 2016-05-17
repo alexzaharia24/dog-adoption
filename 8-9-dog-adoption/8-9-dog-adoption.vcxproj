@@ -104,6 +104,7 @@
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="DogValidator.cpp" />
     <ClCompile Include="FileAdoptionList.cpp" />
+    <ClCompile Include="HTMLAdoptionList.cpp" />
     <ClCompile Include="Repository.cpp" />
     <ClCompile Include="RepositoryExceptions.cpp" />
     <ClCompile Include="Test.cpp" />

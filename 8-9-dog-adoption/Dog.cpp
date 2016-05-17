@@ -73,6 +73,6 @@ ostream & operator<<(ostream & Str, const Dog& d) {
 
 /* OPERATIONS */
 void Dog::display() {
-	/*ShellExecuteA(NULL, NULL, "iexplore.exe", this->getPhoto().c_str(), NULL, SW_SHOWMAXIMIZED);*/
+	ShellExecuteA(NULL, NULL, "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe", this->getPhoto().c_str(), NULL, SW_SHOWMAXIMIZED);
 }
 
