@@ -3,7 +3,7 @@
 #include "Dog.h"
 
 class AdoptionList {
-private:
+protected:
 	std::vector<Dog> adopted;
 	int current;
 public:

@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Test.h"
 #include "DogValidator.h"
+#include "CSVAdoptionList.h"
 
 void Test::testDog() {
 	Dog d{ "abc", "Xyz", 1, "http" };
@@ -56,7 +57,7 @@ void Test::testRepo() {
 
 void Test::testCtrl() {
 	Repository r;
-	AdoptionList* a = new AdoptionList();
+	FileAdoptionList* a = new CSVAdoptionList();
 	Controller c(r, a, "");
 	vector<Dog> dogs = c.getRepo().getDogs();
 	assert(c.getRepo().getDogs().size() == 0);

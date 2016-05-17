@@ -100,8 +100,10 @@
     <ClCompile Include="AdoptionList.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="CSVAdoptionList.cpp" />
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="DogValidator.cpp" />
+    <ClCompile Include="FileAdoptionList.cpp" />
     <ClCompile Include="Repository.cpp" />
     <ClCompile Include="RepositoryExceptions.cpp" />
     <ClCompile Include="Test.cpp" />
@@ -110,8 +112,11 @@
   <ItemGroup>
     <ClInclude Include="AdoptionList.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="CSVAdoptionList.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="DogValidator.h" />
+    <ClInclude Include="FileAdoptionList.h" />
+    <ClInclude Include="HTMLAdoptionList.h" />
     <ClInclude Include="Repository.h" />
     <ClInclude Include="RepositoryExceptions.h" />
     <ClInclude Include="Test.h" />

@@ -20,8 +20,10 @@ public:
 		Input:	cmd (string)	- the command to be executed. 
 		Output: 1 - if the user entered "exit"
 		0 - otherwise */
-	void browseDogsMenu(vector<Dog> dogs);
+	void browseDogsMenu(vector<Dog>& dogs);
 	/* User browses the list of dogs. Show for each dog the option to adopt, next (to move to the next dog), exit (go back). It will also open a browser window with the photo of the dog. */
+	void browseAdoptedDogs(vector<Dog>& dogs);
+	/*	Browse list of adopted dogs. */
 	int adminExecute(string cmd);
 	/* Execute the commands of the Admin Panel. 
 		Input:	cmd (string)	- the command to be executed.

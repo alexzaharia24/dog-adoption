@@ -5,12 +5,6 @@
 #include "UI.h"
 #include "RepositoryExceptions.h"
 
-
-/* CONSTRUCTORS */
-//UI::~UI() {
-//	delete ctrl;
-//}
-
 /* OPERATIONS */
 void UI::printShelterDogs() {
 	for (auto d : this->ctrl.getRepo().getDogs())
@@ -192,6 +186,7 @@ void userCommands() {
 	cout << "bro	- Browose dogs.\n";
 	cout << "fil	- Filter dogs.\n";
 	cout << "lis	- See adoption list.\n";
+	cout << "sav	- Save adoption list to file. \n";
 	cout << "exit	- Go back to Main Menu.\n";
 	cout << "\n";
 }
@@ -236,9 +231,24 @@ int UI::userExecute(string cmd) {
 		if (this->ctrl.getAdopted().size() == 0) {
 			cout << "\nNo adoption yet.";
 		}
-		browseDogsMenu(this->ctrl.getAdopted());
+		browseAdoptedDogs(this->ctrl.getAdopted());
 		return 0;
 	}
+	else if (cmd == "sav") {
+		string fname;
+		cout << "Enter file name: ";
+		cin >> fname;
+		
+		try {
+			this->ctrl.saveAdoptionListToFile(fname);
+		}
+		catch (FileException& e) {
+			cout << e.what() << endl;
+		}
+
+		cout << "Saved\n";
+	}
+
 	else {
 		cout << ">> Wrong command\n";
 		cout << "\n";
@@ -254,8 +264,9 @@ void UI::userMenu() {
 	} while (!userExecute(cmd));
 }
 
-void UI::browseDogsMenu(vector<Dog> dogs) {
-	
+
+
+void UI::browseDogsMenu(vector<Dog>& dogs) {
 	
 	int i = 0;
 	string cmd;
@@ -269,7 +280,6 @@ void UI::browseDogsMenu(vector<Dog> dogs) {
 		}
 		Dog d = (dogs)[i];
 		d.display();
-
 
 		cout << "\n";
 		cout << d << "\n";
@@ -286,7 +296,42 @@ void UI::browseDogsMenu(vector<Dog> dogs) {
 			cout << "\n";
 			cout << ">>> "<<d.getName() << " was adopted.\n";
 			this->ctrl.addDogToAdoptionList(d);
+			dogs.erase(dogs.begin() + i);
 			continue;
+		}
+		else if (cmd == "next") {
+			i++;
+			continue;
+		}
+		else {
+			cout << ">> Wrong command.\n";
+		}
+	}
+}
+
+void UI::browseAdoptedDogs(vector<Dog>& dogs) {
+	int i = 0;
+	string cmd;
+	while (1) {
+		if (dogs.size() == 0) {
+			cout << "\nThere are no adopted dogs. \n";
+			return;
+		}
+		if (i == dogs.size()) {
+			i = 0;
+		}
+		Dog d = (dogs)[i];
+		d.display();
+
+		cout << "\n";
+		cout << d << "\n";
+		cout << "next	- Next dog.\n";
+		cout << "exit	- Go back to the User Panel.\n";
+		cout << "\n";
+
+		cmd = readCmd();
+		if (cmd == "exit") {
+			break;
 		}
 		else if (cmd == "next") {
 			i++;

@@ -2,17 +2,17 @@
 #include <vector>
 #include "DogValidator.h"
 #include "Repository.h"
-#include "AdoptionList.h"
+#include "FileAdoptionList.h"
 
 class Controller {
 private:
 	Repository repo;
-	AdoptionList *adoptionList;
+	FileAdoptionList *adoptionList;
 	DogValidator validator;
 	string export_type;
 public:
 	/* CONTSTRUCTORS */
-	Controller(const Repository& r, AdoptionList *a, string e) : repo{ r }, adoptionList{ a }, export_type{ e } {};
+	Controller(const Repository& r, FileAdoptionList *a, string e) : repo{ r }, adoptionList{ a }, export_type{ e } {};
 	/* Controller constructor. */
 	~Controller();
 	/* Controller destructor. */
@@ -42,4 +42,7 @@ public:
 		Input:	breed (string)  - the given breed 
 				age (int)		- the given age
 		Output: the list of dogs that match the criteria. */
+
+	void saveAdoptionListToFile(string fname);
+	void openAdoptionList();
 };

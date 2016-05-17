@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <iterator>
+#include <iostream>
 #include "Controller.h"
 
 /* CONSTRUCTORS */
@@ -75,4 +76,19 @@ vector<Dog> Controller::filter(string breed, int age) {
 	return result;
 }
 
+void Controller::saveAdoptionListToFile(string fname) {
+	if (this->adoptionList == nullptr) {
+		return;
+	}
+	this->adoptionList->writeToFile(fname);
+}
+
+void Controller::openAdoptionList() {
+	try {
+		this->adoptionList->displayAdoptionList();
+	}
+	catch (exception e) {
+		cout << e.what() << endl;
+	}
+}
 

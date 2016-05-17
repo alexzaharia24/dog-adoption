@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include "UI.h"
+#include "CSVAdoptionList.h"
 #include "Test.h"
 
 using namespace std;
@@ -40,11 +41,13 @@ int main() {
 	export_type = chooseExportType();
 
 	Repository repo;
-	AdoptionList* adop = new AdoptionList();
+	FileAdoptionList* adop = new CSVAdoptionList();
 	Controller ctrl(repo, adop, export_type);
 	UI ui(ctrl);
 	App app(ui);
 	app.run();
+
+	delete adop;
 
 	system("pause");
 	return 0;
